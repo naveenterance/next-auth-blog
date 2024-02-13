@@ -1,5 +1,5 @@
 import connectMongoDB from "@/db/mongodb";
-import Article from "@/models/articles";
+import article from "@/models/articles";
 import { NextResponse } from "next/server";
 
 interface ArticleData {
@@ -11,19 +11,20 @@ interface ArticleData {
 export async function POST(request: Request): Promise<NextResponse> {
   const { title, content, author }: ArticleData = await request.json();
   await connectMongoDB();
-  await Article.create({ title, content, author });
+  await article.create({ title, content, author });
   return NextResponse.json({ message: "article Created" }, { status: 201 });
 }
 
 export async function GET(): Promise<NextResponse> {
   await connectMongoDB();
-  const articles = await Article.find();
+  const articles = await article.find();
   return NextResponse.json({ articles });
 }
 
 export async function DELETE(request: Request): Promise<NextResponse> {
-  const id: string = request.nextUrl.searchParams.get("id");
+  const url = new URL(request.url);
+  const id: string | null = url.searchParams.get("id");
   await connectMongoDB();
-  await Article.findByIdAndDelete(id);
+  await article.findByIdAndDelete(id);
   return NextResponse.json({ message: "article deleted" }, { status: 200 });
 }
