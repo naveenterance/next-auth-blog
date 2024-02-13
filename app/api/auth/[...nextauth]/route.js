@@ -1,43 +1,49 @@
-import NextAuth from "next-auth";
+import { connectMongoDB } from "@/lib/mongodb";
+import Authors from "@/models/user";
+import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import connectMongoDB from "@/db/mongodb";
+import bcrypt from "bcryptjs";
 
-const handler = NextAuth({
+export const authOptions = {
+  secret: process.env.AUTH_SECRET,
   providers: [
     CredentialsProvider({
-      credentials: {
-        name: { label: "name", type: "text" },
-        password: { label: "password", type: "password" },
-      },
+      name: "credentials",
+      credentials: {},
+
       async authorize(credentials) {
-        const { name, password } = credentials;
+        const { email, password } = credentials;
+
         try {
-          const db = await connectMongoDB();
-          console.log(db);
-          const user = await db.collection("author");
-          console.log(user);
+          await connectMongoDB();
+          const user = await Authors.findOne({ email });
 
           if (!user) {
-            throw new Error("No user found");
+            return null;
           }
 
-          if (password !== user.password) {
-            throw new Error("Invalid password");
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+
+          if (!passwordsMatch) {
+            return null;
           }
 
-          return { name: user.name };
+          return user;
         } catch (error) {
-          console.error("Error during authentication:", error);
-          throw new Error("Authentication failed");
+          console.log("Error: ", error);
         }
       },
     }),
   ],
-  pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signout",
-    error: "/auth/error",
+  session: {
+    strategy: "jwt",
   },
-});
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+  },
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
