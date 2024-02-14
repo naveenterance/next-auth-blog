@@ -1,8 +1,6 @@
 import UserInfo from "@/components/UserInfo";
 import ArticleList from "@/components/Articles";
 import Link from "next/link";
-import Extra from "@/components/Extra";
-// import Upload from "/upload/page";
 import AuthorList from "@/components/Authors";
 
 export default function Dashboard() {
@@ -14,8 +12,6 @@ export default function Dashboard() {
       </Link>
       <ArticleList />
       <AuthorList />
-      <Extra />
-      {/* <Upload /> */}
     </>
   );
 }

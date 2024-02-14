@@ -1,19 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 
-export default function AddArticle() {
+const UploadForm = () => {
+  const [file, setFile] = useState<File>();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
-
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!title || !content || !author) {
+    if (!title || !content || !author || !file) {
       alert("Title, content, and author are required.");
       return;
     }
@@ -23,9 +22,8 @@ export default function AddArticle() {
       alert("Make title more unique.");
       return;
     }
-
     try {
-      const res = await fetch("http://localhost:3000/api/articles", {
+      const resForm = await fetch("http://localhost:3000/api/articles", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -33,7 +31,21 @@ export default function AddArticle() {
         body: JSON.stringify({ title, content, author }),
       });
 
-      if (res.ok) {
+      // Get the file extension
+      const fileExtension = file.name.split(".").pop();
+      // Create a new File object with the title and preserved extension
+      const fileWithTitle = new File([file], `${title}.${fileExtension}`, {
+        type: file.type,
+      });
+
+      const data = new FormData();
+      data.append("file", fileWithTitle);
+
+      const resImage = await fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      });
+      if (resForm.ok && resImage.ok) {
         router.push("/");
       } else {
         throw new Error("Failed to create an Article");
@@ -44,7 +56,7 @@ export default function AddArticle() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+    <form onSubmit={onSubmit}>
       <input
         onChange={(e) => setTitle(e.target.value)}
         value={title}
@@ -67,6 +79,12 @@ export default function AddArticle() {
         type="text"
         placeholder="Article author"
       />
+      <input
+        type="file"
+        name="file"
+        accept="image/*"
+        onChange={(e) => setFile(e.target.files?.[0])}
+      />
 
       <button
         type="submit"
@@ -76,4 +94,6 @@ export default function AddArticle() {
       </button>
     </form>
   );
-}
+};
+
+export default UploadForm;

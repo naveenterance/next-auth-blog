@@ -1,8 +1,14 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
-const Upload = () => {
-  async function upload(data) {
+// interface UploadProps {
+//   title: string;
+// }
+
+const title = "example";
+
+const Upload: React.FC<UploadProps> = () => {
+  async function upload(data: FormData): Promise<{ success: boolean }> {
     "use server";
 
     const file = data.get("file");
@@ -10,10 +16,17 @@ const Upload = () => {
       throw new Error("No file uploaded");
     }
 
-    const bytes = await file.arrayBuffer();
+    const bytes = await (file as File).arrayBuffer();
     const buffer = Buffer.from(bytes);
+    const fileExtension = file ? (file as File).name.split(".").pop() : "";
 
-    const path = join(__dirname, ...Array(3).fill(".."), "public", file.name);
+    const path = join(
+      __dirname,
+      ...Array(4).fill(".."),
+      "public",
+      `${title}.${fileExtension}`
+    );
+
     await writeFile(path, buffer);
     console.log(`open ${path} to see the uploaded file`);
 
