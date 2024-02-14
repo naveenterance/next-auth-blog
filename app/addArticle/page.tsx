@@ -46,7 +46,7 @@ const UploadForm = () => {
         body: data,
       });
       if (resForm.ok && resImage.ok) {
-        router.push("/");
+        router.push("home");
       } else {
         throw new Error("Failed to create an Article");
       }

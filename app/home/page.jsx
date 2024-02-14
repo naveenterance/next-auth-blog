@@ -3,7 +3,7 @@ import ArticleList from "@/components/Articles";
 import Link from "next/link";
 import AuthorList from "@/components/Authors";
 
-export default function Dashboard() {
+export default function Home() {
   return (
     <>
       <UserInfo />

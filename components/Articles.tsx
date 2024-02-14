@@ -52,23 +52,22 @@ const ArticleList: React.FC = () => {
   return (
     <>
       {articles.map((item) => (
-        <Link href={`/articles/${item.title}`}>
-          <div
-            key={item._id}
-            className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start"
-          >
-            <div>
-              <h2 className="font-bold text-2xl">{item.title}</h2>
-              <div>{item.content}</div>
-              <div>{item.author}</div>
-            </div>
-
-            <div className="flex gap-2">
-              <Remove id={item._id} />
-              <Link href={`/editArticle/${item.title}`}>edit</Link>
-            </div>
+        <div
+          key={item._id}
+          className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start"
+        >
+          <div>
+            <h2 className="font-bold text-2xl">{item.title}</h2>
+            <div>{item.content}</div>
+            <div>{item.author}</div>
           </div>
-        </Link>
+
+          <div className="flex gap-2">
+            <Remove id={item._id} />
+            <Link href={`/editArticle/${item.title}`}>edit</Link>
+            <Link href={`/articles/${item.title}`}>Read more </Link>
+          </div>
+        </div>
       ))}
     </>
   );

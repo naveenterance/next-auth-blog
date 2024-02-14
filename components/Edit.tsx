@@ -15,9 +15,6 @@ const Edit: FC<EditProps> = ({ id, title, content, author }) => {
   const [newContent, setNewContent] = useState<string>(content);
   const [newAuthor, setNewAuthor] = useState<string>(author);
 
-  console.log(title);
-  console.log(content);
-  console.log(author);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

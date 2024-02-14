@@ -1,3 +1,5 @@
+import React from "react";
+
 const getByTitle = async (title) => {
   try {
     const res = await fetch(`http://localhost:3000/api/articles/${title}`, {
@@ -5,10 +7,13 @@ const getByTitle = async (title) => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch article");
+      throw new Error(
+        `Failed to fetch article: ${res.status} ${res.statusText}`
+      );
     }
 
     const data = await res.json();
+
     return data.article;
   } catch (error) {
     console.error(error);
@@ -28,10 +33,9 @@ const EditArticle = async ({ params }) => {
 
     return (
       <>
-        <div>article._id</div>
-        <div>title</div>
-        <div>article.content</div>
-        <div> article.author</div>
+        <div>{article.title}</div>
+        <div>{article.content}</div>
+        <div>{article.author}</div>
       </>
     );
   } catch (error) {
