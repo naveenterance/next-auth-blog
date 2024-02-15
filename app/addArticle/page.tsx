@@ -2,22 +2,26 @@
 
 import React, { useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const UploadForm = () => {
   const [file, setFile] = useState<File>();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [author, setAuthor] = useState<string>("");
+  // const [author, setAuthor] = useState<string>("");
   const router = useRouter();
+  const { data: session } = useSession();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!title || !content || !author || !file) {
-      alert("Title, content, and author are required.");
+    if (!title || !content || !file) {
+      alert("Title, content, and image are required.");
       return;
     }
     const test = await fetch(`http://localhost:3000/api/articles/${title}`);
-
+    console.log(session);
+    const author = session?.user?.name;
+    console.log(session?.user?.name);
     if (test.ok) {
       alert("Make title more unique.");
       return;
@@ -65,20 +69,21 @@ const UploadForm = () => {
         placeholder="Article Title"
       />
 
-      <input
+      <textarea
         onChange={(e) => setContent(e.target.value)}
         value={content}
         className="border border-slate-500 px-8 py-2"
-        type="text"
         placeholder="Article content"
+        style={{ whiteSpace: "pre-wrap" }}
       />
-      <input
+
+      {/* <input
         onChange={(e) => setAuthor(e.target.value)}
         value={author}
         className="border border-slate-500 px-8 py-2"
         type="text"
         placeholder="Article author"
-      />
+      /> */}
       <input
         type="file"
         name="file"

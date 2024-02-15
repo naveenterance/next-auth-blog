@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const getByTitle = async (title) => {
   try {
@@ -33,9 +34,28 @@ const EditArticle = async ({ params }) => {
 
     return (
       <>
-        <div>{article.title}</div>
-        <div>{article.content}</div>
-        <div>{article.author}</div>
+        <div className="w-screen ">
+          <div
+            style={{
+              backgroundImage: `url('/${article.title}.jpg'), url('/${article.title}.jpeg'), url('/${article.title}.png')`,
+              scale: "75%",
+            }}
+            className="bg-scroll bg-no-repeat bg-cover bg-center flex justify-end h-screen relative"
+          >
+            <div className="absolute inset-0 bg-black opacity-30" />
+            <div className="absolute inset-0 flex justify-end items-center">
+              <div className="mx-auto text-5xl text-white shadow-xl font-bold ">
+                {article.title}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 w-5/6 mx-auto text-md">{article.content}</div>
+          <div className="absolute  right-24  text-3xl font-extrabold opacity-60 ">
+            {" "}
+            <p className="mb-24"> {article.author}</p>
+          </div>
+        </div>
       </>
     );
   } catch (error) {

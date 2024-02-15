@@ -42,25 +42,26 @@ const Edit: FC<EditProps> = ({ id, title, content, author }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <input
+      {/* <input
         onChange={(e) => setNewTitle(e.target.value)}
         value={newTitle}
         className="border border-slate-500 px-8 py-2"
         type="text"
-      />
+      /> */}
 
-      <input
+      <textarea
         onChange={(e) => setNewContent(e.target.value)}
         value={newContent}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
+        // className="border border-slate-500 px-8 py-2 w-5/6 "
+        rows="4"
+        class="block p-2.5  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 w-5/6 h-screen m-12    "
       />
-      <input
+      {/* <input
         onChange={(e) => setNewAuthor(e.target.value)}
         value={newAuthor}
         className="border border-slate-500 px-8 py-2"
         type="text"
-      />
+      /> */}
 
       <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit">
         Update Topic

@@ -1,13 +1,9 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
-// interface UploadProps {
-//   title: string;
-// }
-
 const title = "example";
 
-const Upload: React.FC<UploadProps> = () => {
+const Upload: React.FC = () => {
   async function upload(data: FormData): Promise<{ success: boolean }> {
     "use server";
 
