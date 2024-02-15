@@ -44,7 +44,7 @@ const EditArticle = async ({ params }) => {
           >
             <div className="absolute inset-0 bg-black opacity-30" />
             <div className="absolute inset-0 flex justify-end items-center">
-              <div className="mx-auto text-5xl text-white shadow-xl font-bold ">
+              <div className="mx-6 text-5xl text-white  font-bold ">
                 {article.title}
               </div>
             </div>

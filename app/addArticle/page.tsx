@@ -62,7 +62,11 @@ const UploadForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <input
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          if (e.target.value.length <= 100) {
+            setTitle(e.target.value);
+          }
+        }}
         value={title}
         className="border border-slate-500 px-8 py-2"
         type="text"

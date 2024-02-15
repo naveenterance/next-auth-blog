@@ -68,9 +68,9 @@ const ArticleList: React.FC = () => {
               className="lg:col-span-3  mt-24 mx-4   bg-scroll bg-no-repeat bg-cover bg-center flex justify-end"
             >
               <div className="bg-gray-300 w-1/2 mx-4 p-4 opacity-95  h-1/2">
-                <div className=" text-5xl">{item.title}</div>
+                <div className=" text-3xl">{item.title}</div>
 
-                <div className="truncate text-xl">{item.content}</div>
+                {/* <div className="truncate text-xl">{item.content}</div> */}
                 {/* 
                 <div className="font-bold opacity-60 flex justify-end">
                   {item.author}
@@ -130,7 +130,7 @@ const ArticleList: React.FC = () => {
                 className="mx-4  mt-6 bg-scroll bg-no-repeat bg-cover bg-center w-full h-48 "
               >
                 <div className="bg-gray-300 w-1/2 mx-2 p-4 opacity-90">
-                  <p className="font-bold text-2xl">{item.title}</p>
+                  <p className="font-bold text-xl">{item.title}</p>
                   {/* <p className="truncate">{item.content}</p> */}
                   {/* <div>{item.author}</div> */}
 
@@ -191,7 +191,7 @@ const ArticleList: React.FC = () => {
                 className="mx-4  mt-6 bg-scroll bg-no-repeat bg-cover bg-center w-5/6 lg:w-full h-48  "
               >
                 <div className="bg-gray-300 w-1/2 mx-2 p-4 opacity-90">
-                  <p className="font-bold text-2xl">{item.title}</p>
+                  <p className="font-bold text-xl">{item.title}</p>
                   {/* <p className="truncate">{item.content}</p> */}
                   {/* <div>{item.author}</div> */}
 

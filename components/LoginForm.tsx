@@ -44,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
               type="email"
               name="email"
               id="email"
-              className="block py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent border-0 border-b-2 appearance-none  border-gray-600 focus:border-teal-500 focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+              className="block py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent border-0 border-b-2 appearance-none  border-gray-600 focus:outline-none focus:ring-0 focus:border-teal-600 peer"
               placeholder=" "
               onChange={(e) => setEmail(e.target.value)}
               type="text"
@@ -74,14 +74,14 @@ const LoginForm: React.FC<LoginFormProps> = () => {
             </label>
           </div>
 
-          <button className=" text-gray-600 font-bold px-6 py-2  text-xl flex hover:text-teal-600">
+          <button className=" text-gray-600 font-bold px-6 py-2  text-xl flex hover:text-teal-600  transition-colors duration-[400ms]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2.5}
               stroke="currentColor"
-              className="w-12 h-12 hover:text-teal-600"
+              className="w-12 h-12 "
             >
               <path
                 strokeLinecap="round"
@@ -99,7 +99,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
 
           <Link className="text-md mt-3 px-6 py-2 " href={"/register"}>
             Don't have an account?{" "}
-            <span className="font-bold text-md text-gray-600 flex  hover:text-teal-600">
+            <span className="font-bold text-md text-gray-600 flex  hover:text-teal-600  transition-colors duration-[400ms]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
