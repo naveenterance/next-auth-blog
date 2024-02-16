@@ -1,8 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import Image from "next/image";
 import moment from "moment";
 
-const getByTitle = async (title) => {
+interface Article {
+  title: string;
+  author: string;
+  createdAt: string;
+  content: string;
+}
+
+const getByTitle = async (title: string): Promise<Article | null> => {
   try {
     const res = await fetch(`http://localhost:3000/api/articles/${title}`, {
       cache: "no-store",
@@ -23,7 +30,13 @@ const getByTitle = async (title) => {
   }
 };
 
-const EditArticle = async ({ params }) => {
+interface ArticleProps {
+  params: {
+    title: string;
+  };
+}
+
+const Article: FC<ArticleProps> = async ({ params }) => {
   const { title } = params;
 
   try {
@@ -43,9 +56,9 @@ const EditArticle = async ({ params }) => {
             }}
             className="bg-scroll bg-no-repeat bg-cover bg-center flex justify-end h-screen relative"
           >
-            <div className="absolute inset-0 bg-black opacity-30" />
-            <div className="absolute inset-0 flex justify-end items-center">
-              <div className="mx-6 text-5xl text-white  font-bold ">
+            <div className="absolute inset-0 bg-black opacity-30 " />
+            <div className="absolute inset-0 flex justify-center items-center">
+              <div className="mx-auto text-5xl text-white  font-bold  p-4">
                 {article.title}
               </div>
             </div>
@@ -84,4 +97,4 @@ const EditArticle = async ({ params }) => {
   }
 };
 
-export default EditArticle;
+export default Article;

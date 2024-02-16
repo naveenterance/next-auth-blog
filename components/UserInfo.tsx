@@ -11,7 +11,7 @@ export default function UserInfo() {
   const [view, setView] = useState<boolean>(false);
 
   return (
-    <div className="fixed top-2 left-4  z-50">
+    <div className="fixed top-2 left-4  z-50 h-12">
       <div
         className=" w-full bg-gray-600  p-1  flex text-white   px-4 py-2 transition-colors duration-[400ms] hover:text-teal-500"
         onClick={() => setView((prev) => !prev)}
