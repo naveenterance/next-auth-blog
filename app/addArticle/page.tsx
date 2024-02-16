@@ -8,7 +8,8 @@ const UploadForm = () => {
   const [file, setFile] = useState<File>();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  // const [author, setAuthor] = useState<string>("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -19,9 +20,8 @@ const UploadForm = () => {
       return;
     }
     const test = await fetch(`http://localhost:3000/api/articles/${title}`);
-    console.log(session);
+
     const author = session?.user?.name;
-    console.log(session?.user?.name);
     if (test.ok) {
       alert("Make title more unique.");
       return;
@@ -35,9 +35,8 @@ const UploadForm = () => {
         body: JSON.stringify({ title, content, author }),
       });
 
-      // Get the file extension
       const fileExtension = file.name.split(".").pop();
-      // Create a new File object with the title and preserved extension
+
       const fileWithTitle = new File([file], `${title}.${fileExtension}`, {
         type: file.type,
       });
@@ -59,48 +58,93 @@ const UploadForm = () => {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    setFile(selectedFile);
+    if (selectedFile) {
+      const imageUrl = URL.createObjectURL(selectedFile);
+      setImagePreview(imageUrl);
+    }
+  };
+
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        onChange={(e) => {
-          if (e.target.value.length <= 100) {
-            setTitle(e.target.value);
-          }
-        }}
-        value={title}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Article Title"
-      />
+    <form onSubmit={onSubmit} className="flex flex-col gap-3 w-screen ">
+      <div className="lg:w-5/6 lg:mx-auto ">
+        <textarea
+          onChange={(e) => {
+            if (e.target.value.length <= 100) {
+              setTitle(e.target.value);
+            }
+          }}
+          value={title}
+          className="block py-2.5 px-0 lg:w-1/2 w-5/6 mx-auto  text-xl text-gray-900 bg-transparent border-0 border-b-2 appearance-none  border-gray-600 focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+          placeholder="Title"
+        />
 
-      <textarea
-        onChange={(e) => setContent(e.target.value)}
-        value={content}
-        className="border border-slate-500 px-8 py-2"
-        placeholder="Article content"
-        style={{ whiteSpace: "pre-wrap" }}
-      />
+        <p className="text-md font-bold opacity-50 m-4">
+          100 max characters for title
+        </p>
+        <div className="w-5/6 bg-gray-200 rounded-full  my-4 mx-auto">
+          <div
+            className="bg-gray-600 text-xs font-medium text-blue-100 text-center py-1 px-3.5 leading-none rounded-full"
+            style={{ width: `${title.length}%` }}
+          >
+            {title.length}
+          </div>
+        </div>
+        <textarea
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
+          className="block p-2.5 text-md text-gray-900 bg-gray-50 mx-auto  rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 w-5/6 lg:w-full  h-screen my-12"
+          placeholder="Article content"
+          style={{ whiteSpace: "pre-wrap" }}
+        />
 
-      {/* <input
-        onChange={(e) => setAuthor(e.target.value)}
-        value={author}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Article author"
-      /> */}
-      <input
-        type="file"
-        name="file"
-        accept="image/*"
-        onChange={(e) => setFile(e.target.files?.[0])}
-      />
+        <div className="w-5/6 mx-auto ">
+          <label className="block mb-2 text-sm font-medium text-gray-900  ">
+            Upload Image
+          </label>
+          <input
+            className="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none "
+            aria-describedby="file_input_help"
+            id="file_input"
+            type="file"
+            name="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          <p className="mt-1 text-sm text-gray-500 d" id="file_input_help">
+            Image should be PNG or JPG format
+          </p>
+        </div>
 
-      <button
-        type="submit"
-        className="bg-green-600 font-bold text-white py-3 px-6 w-fit"
-      >
-        Add Article
-      </button>
+        {imagePreview && (
+          <div className="border-4 border-gray-600 w-2/3 p-4 mx-auto my-4 rounded-lg border-dashed">
+            <img src={imagePreview} alt="Preview" className=" " />
+          </div>
+        )}
+
+        <button
+          type="submit"
+          className=" font-bold text-gray-900 py-3 px-6 mx-8 flex hover:text-teal-600"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2.5}
+            stroke="currentColor"
+            className="w-12 h-12 "
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+          <p className="my-auto"> Add Article</p>
+        </button>
+      </div>
     </form>
   );
 };

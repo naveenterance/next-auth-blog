@@ -33,7 +33,7 @@ const Remove: FC<RemoveProps> = ({ id }) => {
         viewBox="0 0 24 24"
         strokeWidth={2.5}
         stroke="currentColor"
-        className="w-8 h-8 text-red-600"
+        className="w-8 h-8 text-red-600 hover:text-red-400"
       >
         <path
           strokeLinecap="round"

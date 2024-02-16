@@ -1,17 +1,20 @@
-import { connectMongoDB } from "@/lib/mongodb";
-import Authors from "@/models/user";
-import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import { NextAuthOptions } from "next-auth";
+import { connectMongoDB } from "@/lib/mongodb";
+import Authors from "@/models/user";
+interface Credentials {
+  email: string;
+  password: string;
+}
 
-export const authOptions = {
-  secret: process.env.AUTH_SECRET,
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {},
 
-      async authorize(credentials) {
+      async authorize(credentials: Credentials): Promise<any> {
         const { email, password } = credentials;
 
         try {
@@ -22,7 +25,10 @@ export const authOptions = {
             return null;
           }
 
-          const passwordsMatch = await bcrypt.compare(password, user.password);
+          const passwordsMatch: boolean = await bcrypt.compare(
+            password,
+            user.password
+          );
 
           if (!passwordsMatch) {
             return null;
@@ -43,7 +49,3 @@ export const authOptions = {
     signIn: "/",
   },
 };
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };

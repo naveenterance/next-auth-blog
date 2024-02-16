@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import LoadingArtilces from "@/components/Loading";
 import LoadingArticles from "@/components/Loading";
+import moment from "moment";
 
 interface Article {
   _id: string;
@@ -65,16 +66,16 @@ const ArticleList: React.FC = () => {
               style={{
                 backgroundImage: `url('/${item.title}.jpg'), url('/${item.title}.jpeg'), url('/${item.title}.png')`,
               }}
-              className="lg:col-span-3  mt-24 mx-4   bg-scroll bg-no-repeat bg-cover bg-center flex justify-end"
+              className="lg:col-span-3  mt-24 lg:mx-4 lg:h-full h-screen  bg-scroll bg-no-repeat bg-cover bg-center flex justify-end"
             >
-              <div className="bg-gray-300 w-1/2 mx-4 p-4 opacity-95  h-1/2">
-                <div className=" text-3xl">{item.title}</div>
+              <div className="bg-gray-300 lg:w-1/2 w-3/4 mx-4 p-4 opacity-95  h-fit">
+                <div className=" ">
+                  <p className="font-extrabold text-xl ">{item.title} </p>
+                  <p className=" font-bold text-md  opacity-65">
+                    {moment(item.createdAt).format("DD-MM-YYYY")}
+                  </p>
+                </div>
 
-                {/* <div className="truncate text-xl">{item.content}</div> */}
-                {/* 
-                <div className="font-bold opacity-60 flex justify-end">
-                  {item.author}
-                </div> */}
                 <div className="flex gap-1">
                   <Link href={`/articles/${item.title}`}>
                     <svg
@@ -103,7 +104,7 @@ const ArticleList: React.FC = () => {
                           viewBox="0 0 24 24"
                           strokeWidth={2.5}
                           stroke="currentColor"
-                          className="w-8 h-8 text-teal-600"
+                          className="w-8 h-8  text-teal-600 hover:text-teal-400 transition-colors duration-[400ms]"
                         >
                           <path
                             strokeLinecap="round"
@@ -129,10 +130,12 @@ const ArticleList: React.FC = () => {
                 }}
                 className="mx-4  mt-6 bg-scroll bg-no-repeat bg-cover bg-center w-full h-48 "
               >
-                <div className="bg-gray-300 w-1/2 mx-2 p-4 opacity-90">
-                  <p className="font-bold text-xl">{item.title}</p>
-                  {/* <p className="truncate">{item.content}</p> */}
-                  {/* <div>{item.author}</div> */}
+                <div className="bg-gray-300 w-1/2 h-fit mx-2 p-4 opacity-90">
+                  <p className="font-bold lg:text-lg  ">
+                    {item.title.length > 50
+                      ? `${item.title.substring(0, 50)}...`
+                      : item.title}
+                  </p>
 
                   <div className="flex gap-2">
                     <Link href={`/articles/${item.title}`}>
@@ -143,7 +146,7 @@ const ArticleList: React.FC = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={2.5}
                         stroke="currentColor"
-                        className="w-8 h-8  hover:text-teal-500 transition-colors duration-[400ms]"
+                        className="w-8 h-8  hover:text-teal-600  transition-colors duration-[400ms]"
                       >
                         <path
                           strokeLinecap="round"
@@ -163,7 +166,7 @@ const ArticleList: React.FC = () => {
                             viewBox="0 0 24 24"
                             strokeWidth={2.5}
                             stroke="currentColor"
-                            className="w-8 h-8 text-teal-600"
+                            className="w-8 h-8 text-teal-600 hover:text-teal-400 transition-colors duration-[400ms]"
                           >
                             <path
                               strokeLinecap="round"
@@ -191,9 +194,12 @@ const ArticleList: React.FC = () => {
                 className="mx-4  mt-6 bg-scroll bg-no-repeat bg-cover bg-center w-5/6 lg:w-full h-48  "
               >
                 <div className="bg-gray-300 w-1/2 mx-2 p-4 opacity-90">
-                  <p className="font-bold text-xl">{item.title}</p>
-                  {/* <p className="truncate">{item.content}</p> */}
-                  {/* <div>{item.author}</div> */}
+                  <p className="font-bold text-md">
+                    {" "}
+                    {item.title.length > 50
+                      ? `${item.title.substring(0, 50)}...`
+                      : item.title}
+                  </p>
 
                   <div className="flex gap-2">
                     <Link href={`/articles/${item.title}`}>
@@ -204,7 +210,7 @@ const ArticleList: React.FC = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={2.5}
                         stroke="currentColor"
-                        className="w-8 h-8  hover:text-teal-500 transition-colors duration-[400ms]"
+                        className="w-8 h-8  hover:text-teal-600 transition-colors duration-[400ms]"
                       >
                         <path
                           strokeLinecap="round"
@@ -224,7 +230,7 @@ const ArticleList: React.FC = () => {
                             viewBox="0 0 24 24"
                             strokeWidth={2.5}
                             stroke="currentColor"
-                            className="w-8 h-8 text-teal-600"
+                            className="w-8 h-8 text-teal-600 hover:text-teal-400"
                           >
                             <path
                               strokeLinecap="round"

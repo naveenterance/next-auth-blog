@@ -4,7 +4,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import ArticleList from "@/components/Articles";
 import Link from "next/link";
 
-export default async function App() {
+async function App(): Promise<JSX.Element> {
   const session = await getServerSession(authOptions);
 
   if (session) redirect("/home");
@@ -60,3 +60,5 @@ export default async function App() {
     </>
   );
 }
+
+export default App;

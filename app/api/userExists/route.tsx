@@ -3,7 +3,7 @@ import Authors from "@/models/user";
 import { NextResponse } from "next/server";
 
 interface Request {
-  json(): Promise<{ email: string }>;
+  json(): Promise<{ email: string; name: string }>;
 }
 
 interface User {
@@ -13,10 +13,12 @@ interface User {
 export async function POST(req: Request): Promise<NextResponse | undefined> {
   try {
     await connectMongoDB();
-    const { email } = await req.json();
-    const user: User | User[] | null = await Authors.findOne({ email }).select(
-      "_id"
-    );
+    const { name, email } = await req.json();
+
+    const user: User | User[] | null = await Authors.findOne({
+      $or: [{ name }, { email }],
+    }).select("_id");
+
     console.log("user: ", user);
     return NextResponse.json({ user });
   } catch (error) {
