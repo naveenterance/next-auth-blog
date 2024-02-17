@@ -21,7 +21,7 @@ const UploadForm = () => {
       return;
     }
     const test = await fetch(
-      `https://next-auth-blog-sigma.vercel.app/home/api/articles/${title}`
+      `https://next-auth-blog-sigma.vercel.app/api/articles/${title}`
     );
 
     const author = session?.user?.name;
@@ -31,7 +31,7 @@ const UploadForm = () => {
     }
     try {
       const resForm = await fetch(
-        `https://next-auth-blog-sigma.vercel.app/home/api/articles`,
+        `https://next-auth-blog-sigma.vercel.app/api/articles`,
         {
           method: "POST",
           headers: {
@@ -51,7 +51,7 @@ const UploadForm = () => {
       data.append("file", fileWithTitle);
 
       const resImage = await fetch(
-        `https://next-auth-blog-sigma.vercel.app/home/api/upload`,
+        `https://next-auth-blog-sigma.vercel.app/api/upload`,
         {
           method: "POST",
           body: data,
