@@ -30,7 +30,7 @@ export async function PUT(request: Request, { params }: { params: Params }) {
   return NextResponse.json({ message: "Article updated" }, { status: 200 });
 }
 
-export async function GET({ params }: { params: Params }) {
+export async function POST(request: Request, { params }: { params: Params }) {
   const { title } = params;
   await connectMongoDB();
 
