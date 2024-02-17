@@ -1,11 +1,6 @@
 import React, { FC } from "react";
 import Edit from "@/components/Edit";
-
-interface Article {
-  _id: string;
-  content: string;
-  author: string;
-}
+import { Article } from "@/components/getArticles";
 
 interface FetchedData {
   article: Article;

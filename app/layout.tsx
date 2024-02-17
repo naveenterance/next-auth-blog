@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import "./globals.css";
-import AuthProvider from "./AuthProvider";
+import AuthProvider from "@/utils/AuthProvider";
 
 export const metadata = {
   title: "blog",

@@ -8,7 +8,9 @@ interface RemoveProps {
 const Remove: FC<RemoveProps> = ({ id }) => {
   const router = useRouter();
   const removeArticle = async (): Promise<void> => {
-    const confirmed: boolean = confirm("Are you sure?");
+    const confirmed: boolean = confirm(
+      "Are you sure you what to delete this article?"
+    );
 
     if (confirmed) {
       const res: Response = await fetch(

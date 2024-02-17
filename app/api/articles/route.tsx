@@ -1,15 +1,10 @@
 import connectMongoDB from "@/db/mongodb";
 import article from "@/models/articles";
 import { NextResponse } from "next/server";
-
-interface ArticleData {
-  title: string;
-  content: string;
-  author: string;
-}
+import { Article } from "@/components/getArticles";
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const { title, content, author }: ArticleData = await request.json();
+  const { title, content, author }: Article = await request.json();
   await connectMongoDB();
   await article.create({ title, content, author });
   return NextResponse.json({ message: "article Created" }, { status: 201 });
