@@ -28,7 +28,7 @@ const UploadForm = () => {
       return;
     }
     try {
-      const resForm = await fetch("/api/articles", {
+      const resForm = await fetch(`${process.env.API_URL!}/api/articles`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
