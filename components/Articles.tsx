@@ -47,6 +47,7 @@ const ArticleList: React.FC = () => {
                 backgroundImage: `url('/${item.title}.jpg'), url('/${item.title}.jpeg'), url('/${item.title}.png')`,
               }}
               className="lg:col-span-3  mt-24 lg:mx-4 lg:h-full h-screen  bg-scroll bg-no-repeat bg-cover bg-center flex justify-end"
+              key={index}
             >
               <div className="bg-gray-300 lg:w-1/2 w-3/4 mx-4 p-4 opacity-95  h-fit">
                 <div className=" ">
@@ -93,6 +94,7 @@ const ArticleList: React.FC = () => {
                   backgroundImage: `url('/${item.title}.jpg'), url('/${item.title}.jpeg'), url('/${item.title}.png')`,
                 }}
                 className="mx-4  mt-6 bg-scroll bg-no-repeat bg-cover bg-center w-full h-48 "
+                key={index}
               >
                 <div className="bg-gray-300 w-1/2 h-fit mx-2 p-4 opacity-90">
                   <p className="font-bold lg:text-lg  ">
@@ -140,6 +142,7 @@ const ArticleList: React.FC = () => {
                   backgroundImage: `url('/${item.title}.jpg'), url('/${item.title}.jpeg'), url('/${item.title}.png')`,
                 }}
                 className="mx-4  mt-6 bg-scroll bg-no-repeat bg-cover bg-center w-5/6 lg:w-full h-48  "
+                key={index}
               >
                 <div className="bg-gray-300 w-1/2 mx-2 p-4 opacity-90">
                   <p className="font-bold text-md">
