@@ -80,7 +80,7 @@ const ArticleList: React.FC = () => {
               </div>
             </div>
           ))}
-        <div className="lg:col-span-2  h-1/4 lg:w-3/4 w-5/6 flex-col ">
+        <div className="lg:col-span-2  h-1/4 lg:w-3/4 w-5/6 flex-col  ">
           {articles
             .sort(
               (a: Article, b: Article) =>
@@ -128,7 +128,7 @@ const ArticleList: React.FC = () => {
               </div>
             ))}
         </div>
-        <div className="  h-1/4 w-screen lg:grid lg:grid-cols-4 lg:gap-4">
+        <div className="  h-1/4 w-screen lg:grid lg:grid-cols-4 lg:gap-4 lg:mt-12">
           {articles
             .sort(
               (a: Article, b: Article) =>

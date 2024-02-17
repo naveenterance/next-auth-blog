@@ -13,12 +13,9 @@ const Remove: FC<RemoveProps> = ({ id }) => {
     );
 
     if (confirmed) {
-      const res: Response = await fetch(
-        `https://next-auth-blog-sigma.vercel.app/api/articles?id=${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res: Response = await fetch(`/api/articles?id=${id}`, {
+        method: "DELETE",
+      });
 
       if (res.ok) {
         router.push("/");

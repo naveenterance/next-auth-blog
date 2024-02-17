@@ -20,7 +20,7 @@ const UploadForm = () => {
       alert("Title, content, and image are required.");
       return;
     }
-    const test = await fetch(`http://localhost:3000/api/articles/${title}`);
+    const test = await fetch(`${process.env.API_URL!}/api/articles/${title}`);
 
     const author = session?.user?.name;
     if (test.ok) {
@@ -28,7 +28,7 @@ const UploadForm = () => {
       return;
     }
     try {
-      const resForm = await fetch("http://localhost:3000/api/articles", {
+      const resForm = await fetch("/api/articles", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -120,8 +120,15 @@ const UploadForm = () => {
         </div>
 
         {imagePreview && (
-          <div className="border-4 border-gray-600 w-2/3 p-4 mx-auto my-4 rounded-lg border-dashed">
-            <Image src={imagePreview} alt="Preview" className=" " />
+          <div className="border-4 border-gray-600 w-1/3 p-4 mx-auto my-4 rounded-lg border-dashed">
+            <Image
+              src={imagePreview}
+              alt="Preview"
+              className=" "
+              width={500}
+              height={500}
+              object-fit="cover"
+            />
           </div>
         )}
 
