@@ -20,7 +20,7 @@ const UploadForm = () => {
       alert("Title, content, and image are required.");
       return;
     }
-    const test = await fetch(`${process.env.API_URL!}/api/articles/${title}`);
+    const test = await fetch(`${process.env.API_URL}/api/articles/${title}`);
 
     const author = session?.user?.name;
     if (test.ok) {
@@ -28,7 +28,7 @@ const UploadForm = () => {
       return;
     }
     try {
-      const resForm = await fetch(`${process.env.API_URL!}/api/articles`, {
+      const resForm = await fetch(`${process.env.API_URL}/api/articles`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -45,7 +45,7 @@ const UploadForm = () => {
       const data = new FormData();
       data.append("file", fileWithTitle);
 
-      const resImage = await fetch(`${process.env.API_URL!}/api/upload`, {
+      const resImage = await fetch(`${process.env.API_URL}/api/upload`, {
         method: "POST",
         body: data,
       });

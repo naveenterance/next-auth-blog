@@ -14,7 +14,7 @@ interface EditArticleProps {
 
 const getByTitle = async (title: string): Promise<Article | null> => {
   try {
-    const res = await fetch(`${process.env.API_URL!}/api/articles/${title}`, {
+    const res = await fetch(`${process.env.API_URL}/api/articles/${title}`, {
       cache: "no-store",
     });
 
