@@ -3,6 +3,7 @@
 import React, { useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const UploadForm = () => {
   const [file, setFile] = useState<File>();
@@ -120,7 +121,7 @@ const UploadForm = () => {
 
         {imagePreview && (
           <div className="border-4 border-gray-600 w-2/3 p-4 mx-auto my-4 rounded-lg border-dashed">
-            <img src={imagePreview} alt="Preview" className=" " />
+            <Image src={imagePreview} alt="Preview" className=" " />
           </div>
         )}
 

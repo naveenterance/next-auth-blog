@@ -110,7 +110,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           )}
 
           <Link className="text-md mt-3 px-6 py-2 " href={"/register"}>
-            Don't have an account?
+            <p>Don't have an account?</p>
             <span className="font-bold text-md text-gray-600 flex  hover:text-teal-600  transition-colors duration-[400ms]">
               <Svgs
                 className="w-8 h-8 "
