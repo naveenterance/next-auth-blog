@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Svgs from "@/components/Svgs";
 import moment from "moment";
+import { Article } from "@/components/getArticles";
 
 const getByTitle = async (title: string): Promise<Article | null> => {
   try {

@@ -45,7 +45,7 @@ const UploadForm = () => {
       const data = new FormData();
       data.append("file", fileWithTitle);
 
-      const resImage = await fetch("/api/upload", {
+      const resImage = await fetch(`${process.env.API_URL!}/api/upload`, {
         method: "POST",
         body: data,
       });
