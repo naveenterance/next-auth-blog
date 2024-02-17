@@ -1,6 +1,6 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import Authors from "@/models/user";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 interface Request {
   json(): Promise<{ email: string; name: string }>;
@@ -10,7 +10,9 @@ interface User {
   _id: string;
 }
 
-export async function POST(req: Request): Promise<NextResponse | undefined> {
+export async function POST(
+  req: NextRequest
+): Promise<NextResponse | undefined> {
   try {
     await connectMongoDB();
     const { name, email } = await req.json();

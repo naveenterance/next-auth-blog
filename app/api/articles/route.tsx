@@ -1,9 +1,9 @@
 import connectMongoDB from "@/db/mongodb";
 import article from "@/models/articles";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { Article } from "@/components/getArticles";
 
-export async function POST(request: Request): Promise<NextResponse> {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   const { title, content, author }: Article = await request.json();
   await connectMongoDB();
   await article.create({ title, content, author });
@@ -16,7 +16,7 @@ export async function GET(): Promise<NextResponse> {
   return NextResponse.json({ articles });
 }
 
-export async function DELETE(request: Request): Promise<NextResponse> {
+export async function DELETE(request: NextRequest): Promise<NextResponse> {
   const url = new URL(request.url);
   const id: string | null = url.searchParams.get("id");
   await connectMongoDB();

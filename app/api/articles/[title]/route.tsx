@@ -14,7 +14,10 @@ interface Params {
   title: string;
 }
 
-export async function PUT(request: Request, { params }: { params: Params }) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Params }
+) {
   const {
     newTitle: title,
     newContent: content,
