@@ -1,6 +1,6 @@
 import connectMongoDB from "@/db/mongodb";
 import Article from "@/models/articles";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 interface Request {
   json: () => Promise<{
@@ -30,7 +30,7 @@ export async function PUT(request: Request, { params }: { params: Params }) {
   return NextResponse.json({ message: "Article updated" }, { status: 200 });
 }
 
-export async function POST(request: Request, { params }: { params: Params }) {
+export async function GET(req: NextRequest, { params }: { params: Params }) {
   const { title } = params;
   await connectMongoDB();
 
