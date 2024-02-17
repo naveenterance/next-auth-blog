@@ -14,9 +14,12 @@ interface EditArticleProps {
 
 const getByTitle = async (title: string): Promise<Article | null> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/articles/${title}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `https://next-auth-blog-sigma.vercel.app/api/articles/${title}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch article");

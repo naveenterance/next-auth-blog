@@ -72,7 +72,7 @@ const RegisterForm: React.FC = () => {
           setTimeout(() => {
             form.reset();
 
-            router.push("/home");
+            router.push("/login");
           }, 2000);
         };
 

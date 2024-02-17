@@ -19,13 +19,16 @@ const Edit: FC<EditProps> = ({ id, title, content, author }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:3000/api/articles/${title}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8", // Specify charset
-        },
-        body: JSON.stringify({ newContent: newContent }), // Only send newContent
-      });
+      const res = await fetch(
+        `https://next-auth-blog-sigma.vercel.app/api/articles/${title}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8", // Specify charset
+          },
+          body: JSON.stringify({ newContent: newContent }), // Only send newContent
+        }
+      );
 
       if (!res.ok) {
         throw new Error("Failed to update article");

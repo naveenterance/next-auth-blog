@@ -14,7 +14,7 @@ const Remove: FC<RemoveProps> = ({ id }) => {
 
     if (confirmed) {
       const res: Response = await fetch(
-        `http://localhost:3000/api/articles?id=${id}`,
+        `https://next-auth-blog-sigma.vercel.app/api/articles?id=${id}`,
         {
           method: "DELETE",
         }
