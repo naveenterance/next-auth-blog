@@ -20,7 +20,9 @@ const UploadForm = () => {
       alert("Title, content, and image are required.");
       return;
     }
-    const test = await fetch(`${process.env.API_URL}/api/articles/${title}`);
+    const test = await fetch(
+      `https://next-auth-blog-sigma.vercel.app/home/api/articles/${title}`
+    );
 
     const author = session?.user?.name;
     if (test.ok) {
@@ -28,13 +30,16 @@ const UploadForm = () => {
       return;
     }
     try {
-      const resForm = await fetch(`${process.env.API_URL}/api/articles`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ title, content, author }),
-      });
+      const resForm = await fetch(
+        `https://next-auth-blog-sigma.vercel.app/home/api/articles`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ title, content, author }),
+        }
+      );
 
       const fileExtension = file.name.split(".").pop();
 
@@ -45,10 +50,13 @@ const UploadForm = () => {
       const data = new FormData();
       data.append("file", fileWithTitle);
 
-      const resImage = await fetch(`${process.env.API_URL}/api/upload`, {
-        method: "POST",
-        body: data,
-      });
+      const resImage = await fetch(
+        `https://next-auth-blog-sigma.vercel.app/home/api/upload`,
+        {
+          method: "POST",
+          body: data,
+        }
+      );
       if (resForm.ok && resImage.ok) {
         router.push("home");
       } else {
