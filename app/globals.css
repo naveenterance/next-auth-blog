@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* HTML: <div class="loader"></div> */
 .loader {
   width: fit-content;
   font-weight: bold;
@@ -21,7 +20,6 @@
   }
 }
 
-/* HTML: <div class="loader"></div> */
 .loader-button {
   width: 120px;
   height: 20px;

@@ -105,7 +105,7 @@ const RegisterForm: React.FC = () => {
             <div className="relative z-0 mb-5 group">
               <input
                 onChange={(e) => setEmail(e.target.value)}
-                type="text"
+                type="email"
                 className="block py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent border-0 border-b-2 appearance-none border-gray-600 focus:border-teal-500 focus:outline-none focus:ring-0 peer"
                 placeholder=" "
               />

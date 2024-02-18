@@ -46,7 +46,7 @@ const Article: FC<ArticleProps> = async ({ params }) => {
           <div
             style={{
               backgroundImage: `url('/${article.title}.jpg'), url('/${article.title}.jpeg'), url('/${article.title}.png')`,
-              scale: "75%",
+              scale: "100%",
             }}
             className="bg-scroll bg-no-repeat bg-cover bg-center flex justify-end h-screen relative"
           >

@@ -52,7 +52,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-3  my-auto">
           <div className="relative z-0 mb-5 group">
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               className="block py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent border-0 border-b-2 appearance-none  border-gray-600 focus:outline-none focus:ring-0 focus:border-teal-600 peer"

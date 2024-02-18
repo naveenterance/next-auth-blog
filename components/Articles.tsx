@@ -34,7 +34,7 @@ const ArticleList: React.FC = () => {
 
   return (
     <>
-      <div className="lg:grid lg:grid-cols-5 w-screen gap-8">
+      <div className="lg:grid lg:grid-cols-5 w-screen  gap-8">
         {articles
           .sort(
             (a: Article, b: Article) =>
@@ -46,7 +46,7 @@ const ArticleList: React.FC = () => {
               style={{
                 backgroundImage: `url('/${item.title}.jpg'), url('/${item.title}.jpeg'), url('/${item.title}.png')`,
               }}
-              className="lg:col-span-3  mt-24 lg:mx-4 lg:h-full h-screen  bg-scroll bg-no-repeat bg-cover bg-center flex justify-end"
+              className="lg:col-span-3  mt-24 lg:mx-4  h-screen  bg-scroll bg-no-repeat bg-cover bg-center flex justify-end"
               key={index}
             >
               <div className="bg-gray-300 lg:w-1/2 w-3/4 mx-4 p-4 opacity-95  h-fit">
@@ -128,7 +128,7 @@ const ArticleList: React.FC = () => {
               </div>
             ))}
         </div>
-        <div className="  h-1/4 w-screen lg:grid lg:grid-cols-4 lg:gap-4 lg:mt-12">
+        <div className="  h-1/4 w-screen lg:grid lg:grid-cols-4 lg:gap-4 lg:mt-12 mb-12 lg:mr-2">
           {articles
             .sort(
               (a: Article, b: Article) =>

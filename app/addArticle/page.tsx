@@ -10,19 +10,23 @@ const UploadForm = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const router = useRouter();
   const { data: session } = useSession();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
     if (!title || !content || !file) {
       alert("Title, content, and image are required.");
       return;
     }
-    const test = await fetch(
-      `https://next-auth-blog-sigma.vercel.app/api/articles/${title}`
-    );
+    const test = await fetch(`http://localhost:3000//api/articles/${title}`);
 
     const author = session?.user?.name;
     if (test.ok) {
@@ -30,16 +34,13 @@ const UploadForm = () => {
       return;
     }
     try {
-      const resForm = await fetch(
-        `https://next-auth-blog-sigma.vercel.app/api/articles`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({ title, content, author }),
-        }
-      );
+      const resForm = await fetch(`http://localhost:3000//api/articles`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ title, content, author }),
+      });
 
       const fileExtension = file.name.split(".").pop();
 
@@ -50,13 +51,10 @@ const UploadForm = () => {
       const data = new FormData();
       data.append("file", fileWithTitle);
 
-      const resImage = await fetch(
-        `https://next-auth-blog-sigma.vercel.app/api/upload`,
-        {
-          method: "POST",
-          body: data,
-        }
-      );
+      const resImage = await fetch(`http://localhost:3000//api/upload`, {
+        method: "POST",
+        body: data,
+      });
       if (resForm.ok && resImage.ok) {
         router.push("home");
       } else {
@@ -140,26 +138,30 @@ const UploadForm = () => {
           </div>
         )}
 
-        <button
-          type="submit"
-          className=" font-bold text-gray-900 py-3 px-6 mx-8 flex hover:text-teal-600"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2.5}
-            stroke="currentColor"
-            className="w-12 h-12 "
+        {!loading ? (
+          <button
+            type="submit"
+            className=" font-bold text-gray-900 py-3 px-6 mx-8 flex hover:text-teal-600"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          </svg>
-          <p className="my-auto"> Add Article</p>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+              stroke="currentColor"
+              className="w-12 h-12 "
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+            <p className="my-auto"> Add Article</p>
+          </button>
+        ) : (
+          <div className="loader-button"></div>
+        )}
       </div>
     </form>
   );
